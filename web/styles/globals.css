@@ -25,3 +25,10 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+
+@layer components{
+  input {
+    @apply border-[1px] rounded-lg w-full py-1 px-2;
+  }
+}
