@@ -64,7 +64,8 @@ app.get('/users/:id', async (req, res, next) => {
             parsedArray.push(parsedObject)
         })
 
-        res.status(200).json(parsedArray)
+        const files = parsedArray.filter(item => item.id ==req.params.id)
+        res.status(200).json(files[0])
     } catch (e) {
         res.status(400).json(e.message)
     }
