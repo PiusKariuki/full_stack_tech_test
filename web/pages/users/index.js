@@ -30,11 +30,14 @@ const Users = () => {
         const options = {
             method: 'POST',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'X-RapidAPI-Key': 'your-api-key',
-                'X-RapidAPI-Host': 'jokes-by-api-ninjas.p.rapidapi.com',
             },
-            body: JSON.stringify(formState)
+            body: JSON.stringify({
+                "name": formState.name,
+                "email": formState.email ,
+                "avatar": formState.avatar ,
+            })
         };
 
         fetch('http://localhost:3001/users', options)

@@ -1,16 +1,22 @@
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+    return (mod && mod.__esModule) ? mod : {"default": mod};
 };
-Object.defineProperty(exports, "__esModule", { value: true });
+Object.defineProperty(exports, "__esModule", {value: true});
 const express_1 = __importDefault(require("express"));
 const fs = require("fs")
 const path = require("path")
 const cors = require("cors")
+const  bodyParser = require('body-parser')
 const app = (0, express_1.default)();
 const PORT = 3001;
 
 app.use(cors())
+
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 app.use('/', (req, res, next) => {
     next()
@@ -20,7 +26,7 @@ app.use('/', (req, res, next) => {
 /**
  * Get all users
  */
-app.get('/users',  (req, res, next) => {
+app.get('/users', (req, res, next) => {
     try {
         /**
          * get all json files in the users directory
@@ -66,7 +72,7 @@ app.get('/users/:id', async (req, res, next) => {
             parsedArray.push(parsedObject)
         })
 
-        const files = parsedArray.filter(item => item.id ==req.params.id)
+        const files = parsedArray.filter(item => item.id == req.params.id)
         res.status(200).json(files[0])
     } catch (e) {
         res.status(400).json(e.message)
@@ -74,6 +80,26 @@ app.get('/users/:id', async (req, res, next) => {
     next()
 })
 
+/**
+ * Create user
+ */
+app.post('/users', async (req, res, next) => {
+    try {
+        /**
+         * get all json files in the users directory
+         */
+        const jsonFiles = fs.readdirSync(__dirname + '/../data/users')
+        const newId = jsonFiles.length + 1
+        const data = JSON.stringify(req.body)
+
+        console.log('body', req)
+
+
+    } catch (e) {
+        res.status(400).json(e.message)
+    }
+    next()
+})
 
 
 app.listen(PORT, () => {
