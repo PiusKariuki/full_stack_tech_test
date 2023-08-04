@@ -42,7 +42,10 @@ const Users = () => {
 
         fetch('http://localhost:3001/users', options)
             .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => {
+                alert("successful")
+                setOpenModal(false)
+            })
             .catch(error => console.error(error));
     }
 
@@ -59,9 +62,9 @@ const Users = () => {
 
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {users?.map(item => (
+                {users?.map((item, index) => (
                     <div
-                        key={item?.id}
+                        key={index}
                         className="flex flex-col shadow-lg p-4 rounded-lg">
                         <img src={item?.avatar} alt="" className="rounded-full w-20 h-20 object-center object-cover"/>
                         <p className="text-xl font-semibold capitalize">{item.name}</p>
