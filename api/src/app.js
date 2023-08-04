@@ -6,9 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const fs = require("fs")
 const path = require("path")
+const cors = require("cors")
 const app = (0, express_1.default)();
 const PORT = 3001;
 
+app.use(cors())
 
 app.use('/', (req, res, next) => {
     next()

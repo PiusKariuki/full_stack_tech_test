@@ -1,7 +1,7 @@
 //DO THE USERS PAGE HERE AND THE MODAL TO ADD NEW USER ALSO HERE
 
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const Users = () => {
     const [users, setUsers] = useState([])
@@ -23,3 +23,6 @@ const Users = () => {
         </div>
     )
 }
+
+
+export default Users
