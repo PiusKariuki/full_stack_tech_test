@@ -90,11 +90,12 @@ app.post('/users', async (req, res, next) => {
          */
         const jsonFiles = fs.readdirSync(__dirname + '/../data/users')
         const newId = jsonFiles.length + 1
+
         const data = JSON.stringify(req.body)
 
-        console.log('body', req)
+        fs.writeFileSync(__dirname + `/../data/users/${newId}.json`, data)
 
-
+        res.status(200).json("successful")
     } catch (e) {
         res.status(400).json(e.message)
     }
